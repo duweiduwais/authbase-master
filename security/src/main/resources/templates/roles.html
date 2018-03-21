@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>table</title>
+    <head th:include="~{/layout/htmlhead::head}"></head>
+</head>
+<body class="cm-no-transition cm-1-navbar">
+<div th:replace="~{/layout/menu::menu}">menu</div>
+<div th:replace="~{/layout/head::header}">menu</div>
+<div id="global">
+    <div th:replace="~{/layout/global::global}">global</div>
+
+    <div class="container-fluid">
+        <div class="row cm-fix-height">
+            <button class="button" id="aaa">addMenu</button>
+            <table id="table1" class="table table-bordered">
+                <tr>
+                    <td th:each="head:${menuhead}" th:text="#{${head}}">aa</td>
+                </tr>
+                <tr th:each="role : ${roles}" th:object="${role}">
+                    <td th:text="*{roleName}"></td>
+                    <td th:text="*{roleShowName}"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div th:replace="~{/layout/foot::footer}">menu</div>
+
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    //console.log([[${menus}]]);
+    $(document).ready(function () {
+        $("#aaa").click(function () {
+            $.get("http://localhost:8899/menu", function (data) {
+                // console.log(data);
+                $("#table1").prepend("<tr><td>" + data.name + "</td><td>" +
+                    data.href + "</td><td>" + data.hasSubmenu + "</td><td>"
+                    + data.active + "</td></tr>");
+            });
+        });
+    });
+    /*]]>*/
+
+</script>
+</body>
+</html>

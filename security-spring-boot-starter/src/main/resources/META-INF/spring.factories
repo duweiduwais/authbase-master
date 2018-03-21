@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration= \
+  com.duwei.securityspringbootstarter.AuthServerAutoConfiguration,\
+  com.duwei.securityspringbootstarter.WebMvcConfig

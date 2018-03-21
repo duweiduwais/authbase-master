@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>table</title>
+    <head th:include="~{layout/htmlhead::head}"></head>
+</head>
+<body class="cm-no-transition cm-1-navbar">
+<div th:replace="~{layout/menu::menu}">menu</div>
+<div th:replace="~{layout/head::header}">menu</div>
+<div id="global">
+    <div th:replace="~{layout/global::global}">global</div>
+
+    <div class="container-fluid">
+        <div class="row cm-fix-height">
+            <button class="button" id="aaa">addMenu</button>
+            <table id="table1" class="table table-bordered">
+
+                <tr th:each="menu : ${menus}" th:object="${menu}">
+                    <td th:text="*{name}"></td>
+                    <td th:text="*{href}"></td>
+
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div th:replace="~{layout/foot::footer}">menu</div>
+
+
+</body>
+</html>
