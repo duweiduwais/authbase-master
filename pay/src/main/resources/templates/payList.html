@@ -10,19 +10,61 @@
 <div id="global">
     <div th:replace="~{layout/global::global}">global</div>
 
+    <!--<div class="container-fluid">-->
+        <!--<div class="row cm-fix-height">-->
+
+            <!--<table id="table1" class="table table-bordered">-->
+
+                <!--<tr th:each="payPo : ${payPos}" th:object="${payPo}">-->
+                    <!--<td th:text="*{payName}"></td>-->
+                    <!--<td th:text="*{payMoney}"></td>-->
+                    <!--</td>-->
+                <!--</tr>-->
+            <!--</table>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="btn-group">-->
+
     <div class="container-fluid">
         <div class="row cm-fix-height">
 
-            <table id="table1" class="table table-bordered">
+            <div class="btn-group">
+                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Success <span class="caret"></span></button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                </ul>
+            </div>
 
-                <tr th:each="payPo : ${payPos}" th:object="${payPo}">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+
+                    <th>Column heading</th>
+                    <th>Column heading</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr th:each="payPo,iterStat : ${payPos}" th:object="${payPo}" th:class="${iterStat.count % 2 == 0}? 'active' : 'success'">
+                    <td scope="row" th:text="${iterStat.count}"></td>
                     <td th:text="*{payName}"></td>
                     <td th:text="*{payMoney}"></td>
-                    </td>
+
                 </tr>
+                </tbody>
             </table>
         </div>
     </div>
+
+
+</div>
+</div>
+
 </div>
 <div th:replace="~{layout/foot::footer}">menu</div>
 

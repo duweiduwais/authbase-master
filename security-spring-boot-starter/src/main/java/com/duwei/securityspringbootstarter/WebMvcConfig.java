@@ -18,4 +18,9 @@ public class WebMvcConfig extends ThymeleafAutoConfiguration {
     public MenusController menusController(){
         return new MenusController();
     }
+
+    @Bean
+    public AdviceController adviceController(){
+        return new AdviceController();
+    }
 }

@@ -1,7 +1,6 @@
-package com.duwei.contract;
+package com.duwei.securityspringbootstarter;
 
 import com.duwei.commonsspringbootstarter.vo.Menu;
-import com.duwei.securityspringbootstarter.AuthService;
 import com.google.common.base.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -17,6 +16,8 @@ public class AdviceController {
     @Autowired
     private AuthService authService;
 
+
+
     @ModelAttribute
     public void setUserName(Model model,String token){
          model.addAttribute("token",token);
@@ -24,6 +25,8 @@ public class AdviceController {
 
     @ModelAttribute
     public void setMenu(Model model, String token){
+
+
         if(!Strings.isNullOrEmpty(token)){
             String userName = authService.getUserByToken(token);
             List<Menu> menus = authService.getMenusByUsername(userName);
