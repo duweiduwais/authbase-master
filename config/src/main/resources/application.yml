@@ -7,8 +7,9 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/duweiduwais/authbase
+          uri: https://github.com/duweiduwais/authbase-master
           search-paths: config-repo
+
 
 eureka:
   client:
