@@ -26,8 +26,7 @@ public class PayApplication {
 	@Autowired
 	private PayRepository payRepository;
 
-	@Autowired
-	private ConfigurableApplicationContext configurableApplicationContext;
+
 
 	public static void main(String[] args) {
 
