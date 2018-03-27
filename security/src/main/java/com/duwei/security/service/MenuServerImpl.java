@@ -52,12 +52,7 @@ public class MenuServerImpl implements MenuServer {
             resources.addAll(role.getResources());
         });
         String userName = userEntity.get().getName();
-        Optional<Token> token = tokenServer.getTokenByUserName(userName);
-        String tokenURI = "";
-        if(token.isPresent()){
-            tokenURI = "?token="+token.get().getToken();
-        }
-        final String tokenURL = tokenURI;
+        final String tokenURL = getTokenURI(userName);
 
         return resources.stream()
                 .filter(resource -> resource.getResourceType().equals(ResourceType.MENU))
@@ -69,5 +64,14 @@ public class MenuServerImpl implements MenuServer {
 //        .filter(menuEntity -> menuEntity.getDirectory().equals(TrueAndFalse.NO))
 //        .map(menuEntity -> new MenuResource(menuEntity.getMenuNameZH(),"/"+menuEntity.+"/"+menuEntity.getMenu().getUrl()))
 //        .collect(Collectors.toList());
+    }
+
+    private String getTokenURI(String userName){
+        Optional<Token> token = tokenServer.getTokenByUserName(userName);
+        String tokenURI = "";
+        if(token.isPresent()){
+            tokenURI = "?token="+token.get().getToken();
+        }
+        return tokenURI;
     }
 }
