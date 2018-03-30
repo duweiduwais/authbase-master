@@ -1,5 +1,6 @@
 package com.duwei.contract;
 
+import com.duwei.commonsspringbootstarter.base.MenuResource;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,15 @@ public class ContractController {
 
 
     @GetMapping("contract/list")
+    @MenuResource
     public List<Contract> getContractList(){
+
+        return contractRepository.findAll();
+    }
+
+    @GetMapping("contract/list/aaa")
+    @MenuResource
+    public List<Contract> getContractListaaa(){
 
         return contractRepository.findAll();
     }
