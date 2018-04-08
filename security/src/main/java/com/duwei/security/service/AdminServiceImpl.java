@@ -63,19 +63,14 @@ public class AdminServiceImpl implements AdminService {
         List<ResourceEntity> resourceEntities = ConvPoToVo.convResouceToEntity(resources);
         String serviceId = resourceEntities.get(0).getServerid();
         List<ResourceEntity> resourceEntityQuery = resourceServer.findResourcesByServiceId(serviceId);
-        Map<String,ResourceEntity> resMap = Maps.newHashMap();
 
-        resourceEntities.forEach(re -> {
-            String key = re.getMethod()+re.getName()+re.getServerid()+re.getUrl();
-            resMap.put(key,re);
-        });
+        List<ResourceEntity> list = getSaveResourceEntityList(resourceEntities,resourceEntityQuery);
 
-        resourceEntityQuery.forEach(req -> {
-            String key = req.getMethod()+req.getName()+req.getServerid()+req.getUrl();
-            resMap.put(key,req);
-        });
+       return doSaveResourceEntitys(list);
+    }
 
-        List<ResourceEntity> list = Lists.newArrayList(resMap.values());
+    private boolean doSaveResourceEntitys(List<ResourceEntity> list ){
+
         if(list != null && !list.isEmpty()) {
             List<ResourceEntity> rs = resourceRepository.saveAll(list);
             Optional<RoleEntity> adminRole = getAdminRole();
@@ -87,7 +82,30 @@ public class AdminServiceImpl implements AdminService {
             return rs != null ? rs.isEmpty() ? false : true : false;
         }
         return false;
-//        return adminService.addResources(resources);
+    }
+
+    private List<ResourceEntity> getSaveResourceEntityList(List<ResourceEntity> resourceEntities,List<ResourceEntity> resourceEntityQuery){
+        Map<String,ResourceEntity> resMap = Maps.newHashMap();
+
+        resourceEntities.forEach(re -> {
+            String key = re.getMethod()+re.getName()+re.getServerid()+re.getUrl();
+            resMap.put(key,re);
+        });
+
+        resourceEntityQuery.forEach(req -> {
+            String key = req.getMethod()+req.getName()+req.getServerid()+req.getUrl();
+            if(resMap.containsKey(key)){
+            ResourceEntity r1 = resMap.get(key);
+                if(r1 != null){
+                    req.setResourceType(r1.getResourceType());
+                }
+            }
+            resMap.put(key,req);
+        });
+
+        List<ResourceEntity> list = Lists.newArrayList(resMap.values());
+        return list;
+
     }
 
     @Override

@@ -17,14 +17,12 @@ public class ContractController {
 
 
     @GetMapping("contract/list")
-    @MenuResource
     public List<Contract> getContractList(){
 
         return contractRepository.findAll();
     }
 
     @GetMapping("contract/list/aaa")
-    @MenuResource
     public List<Contract> getContractListaaa(){
 
         return contractRepository.findAll();

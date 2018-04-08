@@ -38,7 +38,12 @@
                     <li><a href="#">Separated link</a></li>
                 </ul>
             </div>
-
+            <div>
+                <button type="button" class="btn btn-success" id="exception">Exception</button>
+            </div>
+            <div>
+                <a href="http://localhost:1111/pay/exception/page?token=duwei2123456">ExceptionPage</a></li>
+            </div>
             <table class="table">
                 <thead>
                 <tr>
@@ -68,6 +73,19 @@
 </div>
 <div th:replace="~{layout/foot::footer}">menu</div>
 
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    //console.log([[${menus}]]);
+    $(document).ready(function () {
+        $("#exception").click(function () {
+            $.get("/pay/exception/page?token=duwei2123456", function (data) {
+                 console.log(data);
+            });
+        });
+    });
+    /*]]>*/
+
+</script>
 
 </body>
 </html>
