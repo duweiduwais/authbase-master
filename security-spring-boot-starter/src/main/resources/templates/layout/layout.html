@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <head th:include="~{./layout/htmlhead::head}"></head>
+
+</head>
+<body class="cm-no-transition cm-1-navbar">
+<div th:include="~{layout/menu::menu}">menu</div>
+<div th:include="~{layout/head::header}">menu</div>
+
+<div layout:fragment="content" id="content" ></div>
+<div>
+    <footer class="cm-footer"><span class="pull-left">Connected as John Smith</span><span class="pull-right">&copy; PAOMEDIA SARL</span></footer>
+
+</body>
+</html>

@@ -27,7 +27,21 @@ public class PayController {
 
     @GetMapping("pay/list")
     @MenuResource
-    public String payList(Model model){
+    public String payList(Model model,Locale locale){
+
+        String token = messageSource.getMessage("security.getToken",null, Locale.SIMPLIFIED_CHINESE);
+        String token1 = messageSource.getMessage("security.getToken",null, locale);
+        model.addAttribute("payToken",token);
+        model.addAttribute("payToken1",token1);
+        model.addAttribute("welcomeKey","welcome");
+        List<PayPo> payPos = payRepository.findAll();
+        model.addAttribute("payPos",payPos);
+        return "payList";
+    }
+
+    @GetMapping("pay/list1")
+    @MenuResource
+    public String payList1(Model model){
 
         String token = messageSource.getMessage("security.getToken",null, Locale.SIMPLIFIED_CHINESE);
         List<PayPo> payPos = payRepository.findAll();
@@ -38,6 +52,7 @@ public class PayController {
     @GetMapping("exception/json")
     @ResponseBody
     public String demoJsonException(){
+
         throw new BusinessException("aadfae");
     }
 

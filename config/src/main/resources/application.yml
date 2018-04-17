@@ -8,8 +8,7 @@ spring:
       server:
         git:
           uri: https://github.com/duweiduwais/authbase-master
-          search-paths: config-repo
-
+          search-paths: config-repo/il8n
 
 eureka:
   client:
