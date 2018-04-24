@@ -5,6 +5,7 @@ import com.duwei.commonsspringbootstarter.base.MenuResource;
 import com.duwei.pay.PayPo;
 import com.duwei.pay.PayRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
@@ -25,6 +26,9 @@ public class PayController {
     @Autowired
     private MessageSource messageSource;
 
+    @Value("${server.port}")
+    private String serverPort;
+
     @GetMapping("pay/list")
     @MenuResource
     public String payList(Model model,Locale locale){
@@ -36,6 +40,7 @@ public class PayController {
         model.addAttribute("welcomeKey","welcome");
         List<PayPo> payPos = payRepository.findAll();
         model.addAttribute("payPos",payPos);
+        System.out.println("serverPort------------------"+serverPort);
         return "payList";
     }
 
